@@ -112,6 +112,20 @@ body {
     background: linear-gradient(135deg, #ff4757, #ff3838);
 }
 
+.mic-button.recording:hover {
+    background: linear-gradient(135deg, #ff3838, #ff2d2d);
+    transform: scale(1.05);
+}
+
+.mic-button.recording::after {
+    content: '🔴';
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 1rem;
+    animation: blink 1s infinite;
+}
+
 .mic-pulse {
     position: absolute;
     top: 50%;
@@ -328,6 +342,20 @@ body {
     min-height: 200px;
     max-height: 400px;
     overflow-y: auto;
+    position: relative;
+}
+
+.code-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(59, 130, 246, 0.1) 50%, transparent 70%);
+    pointer-events: none;
+    opacity: 0;
+    animation: codeGlow 3s ease-in-out infinite;
 }
 
 .code-content pre {
@@ -335,15 +363,19 @@ body {
     font-family: 'Courier New', monospace;
     font-size: 0.9rem;
     line-height: 1.6;
+    position: relative;
+    z-index: 2;
 }
 
 .code-content code {
     color: #e2e8f0;
     animation: typewriter 2s steps(40, end);
+    display: block;
+    white-space: pre-wrap;
 }
 
 .upload-button {
-    display: block;
+    display: none; /* Initially hidden */
     margin: 0 auto;
     padding: 15px 40px;
     background: linear-gradient(135deg, #48bb78, #38a169);
@@ -676,6 +708,65 @@ body {
     }
     to {
         opacity: 1;
+    }
+}
+
+@keyframes progressLoad {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes codeGlow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+    }
+}
+
+@keyframes buttonSuccess {
+    0% {
+        transform: scale(1);
+        background: linear-gradient(135deg, #48bb78, #38a169);
+    }
+    50% {
+        transform: scale(1.1);
+        background: linear-gradient(135deg, #10b981, #059669);
+    }
+    100% {
+        transform: scale(1);
+        background: linear-gradient(135deg, #10b981, #059669);
+    }
+}
+
+@keyframes confettiExplode {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0) rotate(0deg);
+    }
+    10% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) rotate(90deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(calc(-50% + 200px), calc(-50% - 300px)) scale(0.2) rotate(720deg);
+    }
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1) rotate(180deg);
     }
 }
 
