@@ -774,19 +774,34 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Test butonu ekle (debug için)
     const testButton = document.createElement('button');
-    testButton.textContent = '🧪 Test AI';
+    testButton.textContent = '🧪';
+    testButton.title = 'Test AI Süreci';
     testButton.style.cssText = `
         position: fixed;
-        top: 10px;
-        right: 10px;
+        bottom: 20px;
+        left: 20px;
         z-index: 9999;
-        padding: 10px;
-        background: #ff6b6b;
+        padding: 8px;
+        background: rgba(255, 107, 107, 0.8);
         color: white;
         border: none;
-        border-radius: 5px;
+        border-radius: 50%;
         cursor: pointer;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
     `;
+    testButton.onmouseenter = () => {
+        testButton.style.transform = 'scale(1.1)';
+        testButton.style.background = 'rgba(255, 107, 107, 1)';
+    };
+    testButton.onmouseleave = () => {
+        testButton.style.transform = 'scale(1)';
+        testButton.style.background = 'rgba(255, 107, 107, 0.8)';
+    };
     testButton.onclick = () => {
         console.log('🧪 Test butonu tıklandı');
         processVoiceCommand('test led yapıyor');
@@ -795,19 +810,34 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Ses tanıma testi butonu ekle
     const speechTestButton = document.createElement('button');
-    speechTestButton.textContent = '🎤 Ses Test';
+    speechTestButton.textContent = '🎤';
+    speechTestButton.title = 'Ses Tanıma Testi';
     speechTestButton.style.cssText = `
         position: fixed;
-        top: 60px;
-        right: 10px;
+        bottom: 20px;
+        left: 70px;
         z-index: 9999;
-        padding: 10px;
-        background: #4ecdc4;
+        padding: 8px;
+        background: rgba(78, 205, 196, 0.8);
         color: white;
         border: none;
-        border-radius: 5px;
+        border-radius: 50%;
         cursor: pointer;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
     `;
+    speechTestButton.onmouseenter = () => {
+        speechTestButton.style.transform = 'scale(1.1)';
+        speechTestButton.style.background = 'rgba(78, 205, 196, 1)';
+    };
+    speechTestButton.onmouseleave = () => {
+        speechTestButton.style.transform = 'scale(1)';
+        speechTestButton.style.background = 'rgba(78, 205, 196, 0.8)';
+    };
     speechTestButton.onclick = () => {
         console.log('🎤 Ses test butonu tıklandı');
         console.log('Recognition object:', recognition);
