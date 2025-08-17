@@ -1,0 +1,869 @@
+/* Reset and Base Styles */
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Comic Neue', cursive;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styles */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: slideInDown 1s ease-out;
+}
+
+.header-content {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3rem;
+    color: #4a5568;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.title i {
+    color: #667eea;
+    margin-right: 15px;
+    animation: bounce 2s infinite;
+}
+
+.subtitle {
+    font-size: 1.4rem;
+    color: #718096;
+    font-weight: 700;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* Speech Section */
+.speech-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    animation: slideInUp 1s ease-out 0.3s both;
+}
+
+.microphone-container {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.mic-button {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #ff6b6b, #ffa500);
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+.mic-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 35px rgba(255, 107, 107, 0.4);
+}
+
+.mic-button:active {
+    transform: scale(0.95);
+}
+
+.mic-button.recording {
+    animation: pulse 1.5s infinite;
+    background: linear-gradient(135deg, #ff4757, #ff3838);
+}
+
+.mic-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(255, 107, 107, 0.3);
+    opacity: 0;
+    z-index: 1;
+}
+
+.mic-pulse.active {
+    animation: pulseRing 1.5s infinite;
+}
+
+.instruction {
+    font-size: 1.5rem;
+    color: #4a5568;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.speech-text-container {
+    margin-top: 20px;
+}
+
+.speech-bubble {
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    animation: bounceIn 0.6s ease-out;
+}
+
+.speech-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 10px solid transparent;
+    border-top-color: #a8edea;
+}
+
+#speechText {
+    font-size: 1.3rem;
+    color: #2d3748;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* AI Processing Section */
+.ai-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    animation: slideInUp 1s ease-out;
+}
+
+.ai-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.ai-robot {
+    margin-bottom: 30px;
+}
+
+.robot-head {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 20px;
+    margin: 0 auto 20px;
+    position: relative;
+    animation: robotMove 3s infinite ease-in-out;
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+
+.robot-eyes {
+    position: absolute;
+    top: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 20px;
+}
+
+.eye {
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 50%;
+    animation: blink 3s infinite;
+}
+
+.robot-mouth {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 15px;
+    border-radius: 0 0 15px 15px;
+    background: #fff;
+    animation: talk 2s infinite;
+}
+
+.ai-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
+    color: #4a5568;
+    margin-bottom: 30px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.loading-animation {
+    margin-top: 20px;
+}
+
+.loading-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.loading-dots span {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: inline-block;
+    animation: loadingDots 1.4s infinite ease-in-out both;
+}
+
+.loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+.loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+/* Code Section */
+.code-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    animation: slideInUp 1s ease-out;
+}
+
+.code-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
+    color: #4a5568;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.code-title i {
+    color: #667eea;
+    margin-right: 10px;
+}
+
+.code-editor {
+    background: #1a202c;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    animation: slideInLeft 0.8s ease-out;
+}
+
+.code-header {
+    background: #2d3748;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.code-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.code-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.code-button.red { background: #ff5f56; }
+.code-button.yellow { background: #ffbd2e; }
+.code-button.green { background: #27ca3f; }
+
+.file-name {
+    color: #a0aec0;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.code-content {
+    padding: 20px;
+    background: #1a202c;
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.code-content pre {
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.code-content code {
+    color: #e2e8f0;
+    animation: typewriter 2s steps(40, end);
+}
+
+.upload-button {
+    display: block;
+    margin: 0 auto;
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #48bb78, #38a169);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(72, 187, 120, 0.3);
+    animation: bounceIn 1s ease-out 0.5s both;
+}
+
+.upload-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(72, 187, 120, 0.4);
+}
+
+.upload-button i {
+    margin-right: 10px;
+}
+
+/* Success Section */
+.success-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    animation: slideInUp 1s ease-out;
+}
+
+.success-animation {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.checkmark {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #48bb78, #38a169);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    animation: checkmarkPop 1s ease-out;
+    box-shadow: 0 10px 25px rgba(72, 187, 120, 0.3);
+}
+
+.checkmark i {
+    font-size: 3rem;
+    color: white;
+    animation: checkmarkDraw 0.8s ease-out 0.3s both;
+}
+
+.celebration {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #ffd700;
+    animation: confettiFall 3s infinite ease-out;
+}
+
+.confetti:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+    background: #ff6b6b;
+}
+
+.confetti:nth-child(2) {
+    left: 30%;
+    animation-delay: 0.5s;
+    background: #4ecdc4;
+}
+
+.confetti:nth-child(3) {
+    left: 50%;
+    animation-delay: 1s;
+    background: #45b7d1;
+}
+
+.confetti:nth-child(4) {
+    left: 70%;
+    animation-delay: 1.5s;
+    background: #96ceb4;
+}
+
+.confetti:nth-child(5) {
+    left: 90%;
+    animation-delay: 2s;
+    background: #ffeaa7;
+}
+
+.success-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.5rem;
+    color: #48bb78;
+    margin-bottom: 20px;
+    animation: bounceIn 1s ease-out 0.5s both;
+}
+
+.success-message {
+    font-size: 1.3rem;
+    color: #4a5568;
+    font-weight: 700;
+    margin-bottom: 30px;
+    animation: fadeIn 1s ease-out 0.8s both;
+}
+
+.restart-button {
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    animation: slideInUp 1s ease-out 1s both;
+}
+
+.restart-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+}
+
+.restart-button i {
+    margin-right: 10px;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 700;
+    animation: fadeIn 1s ease-out 1.5s both;
+}
+
+/* Animations */
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 53%, 80%, 100% {
+        transform: translate3d(0, 0, 0);
+    }
+    40%, 43% {
+        transform: translate3d(0, -15px, 0);
+    }
+    70% {
+        transform: translate3d(0, -7px, 0);
+    }
+    90% {
+        transform: translate3d(0, -3px, 0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes pulseRing {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes robotMove {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes blink {
+    0%, 90%, 100% {
+        transform: scaleY(1);
+    }
+    95% {
+        transform: scaleY(0.1);
+    }
+}
+
+@keyframes talk {
+    0%, 100% {
+        height: 15px;
+    }
+    50% {
+        height: 8px;
+    }
+}
+
+@keyframes loadingDots {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+@keyframes typewriter {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes checkmarkPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes checkmarkDraw {
+    from {
+        opacity: 0;
+        transform: scale(0.3) rotate(-180deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes confettiFall {
+    0% {
+        opacity: 1;
+        transform: translateY(-100px) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100px) rotate(720deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .header-content, .speech-section, .ai-section, .code-section, .success-section {
+        padding: 20px;
+        border-radius: 20px;
+    }
+    
+    .title {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .mic-button {
+        width: 90px;
+        height: 90px;
+        font-size: 2.2rem;
+    }
+    
+    .mic-pulse {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .instruction {
+        font-size: 1.1rem;
+    }
+    
+    #speechText {
+        font-size: 1rem;
+    }
+    
+    .ai-title, .code-title {
+        font-size: 1.4rem;
+    }
+    
+    .success-title {
+        font-size: 1.8rem;
+    }
+    
+    .code-content {
+        font-size: 0.75rem;
+        padding: 12px;
+        max-height: 300px;
+    }
+    
+    .upload-button, .restart-button {
+        padding: 12px 25px;
+        font-size: 1rem;
+        border-radius: 20px;
+    }
+    
+    .robot-head, .checkmark {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .checkmark i {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 8px;
+    }
+    
+    .header-content, .speech-section, .ai-section, .code-section, .success-section {
+        padding: 15px;
+        border-radius: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .title {
+        font-size: 1.6rem;
+        margin-bottom: 8px;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .mic-button {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+    }
+    
+    .mic-pulse {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .instruction {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+    
+    #speechText {
+        font-size: 0.9rem;
+    }
+    
+    .speech-bubble {
+        padding: 15px;
+        border-radius: 15px;
+    }
+    
+    .ai-title, .code-title {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+    
+    .success-title {
+        font-size: 1.6rem;
+    }
+    
+    .success-message {
+        font-size: 1rem;
+    }
+    
+    .robot-head, .checkmark {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .checkmark i {
+        font-size: 2rem;
+    }
+    
+    .code-content {
+        font-size: 0.7rem;
+        padding: 10px;
+        max-height: 250px;
+    }
+    
+    .upload-button, .restart-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        border-radius: 15px;
+    }
+    
+    .main-content {
+        gap: 20px;
+    }
+}
+
+/* Touch-friendly improvements */
+@media (pointer: coarse) {
+    .mic-button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .upload-button, .restart-button {
+        min-height: 44px;
+        padding: 12px 24px;
+    }
+    
+    /* Prevent zoom on input focus */
+    input, select, textarea {
+        font-size: 16px;
+    }
+}
+
+/* Landscape mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .header-content {
+        padding: 15px;
+    }
+    
+    .title {
+        font-size: 1.8rem;
+    }
+    
+    .main-content {
+        gap: 15px;
+    }
+    
+    .speech-section, .ai-section, .code-section, .success-section {
+        padding: 20px;
+    }
+}

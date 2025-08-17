@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Kodlama Arkadaşım">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Kodlama Arkadaşım - Konuş, Kodla!</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23667eea'/><text y='50' x='50' text-anchor='middle' dominant-baseline='central' font-size='50'>🤖</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">
+                    <i class="fas fa-robot"></i>
+                    Kodlama Arkadasım
+                </h1>
+                <p class="subtitle">Konus ve kodlarını oluştur! 🚀</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Speech Section -->
+            <section class="speech-section" id="speechSection">
+                <div class="speech-container">
+                    <div class="microphone-container">
+                        <button class="mic-button" id="micButton">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <div class="mic-pulse" id="micPulse"></div>
+                    </div>
+                    <p class="instruction">Mikrofona bas ve ne yapmak istediğini söyle!</p>
+                    
+                    <!-- Speech Text Display -->
+                    <div class="speech-text-container" id="speechTextContainer">
+                        <div class="speech-bubble">
+                            <p id="speechText">Sesini dinliyorum... 🎤</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Processing Section -->
+            <section class="ai-section" id="aiSection" style="display: none;">
+                <div class="ai-container">
+                    <div class="ai-robot">
+                        <div class="robot-head">
+                            <div class="robot-eyes">
+                                <div class="eye left-eye"></div>
+                                <div class="eye right-eye"></div>
+                            </div>
+                            <div class="robot-mouth"></div>
+                        </div>
+                    </div>
+                    <h2 class="ai-title">Mükemmel bir çocuksu, 3D efekterle kodlar oluşturuluyor! ✨</h2>
+                    <div class="loading-animation">
+                        <div class="loading-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Code Display Section -->
+            <section class="code-section" id="codeSection" style="display: none;">
+                <div class="code-container">
+                    <h2 class="code-title">
+                        <i class="fas fa-code"></i>
+                        Senin İçin Oluşturduğum Kodlar!
+                    </h2>
+                    
+                    <div class="code-editor">
+                        <div class="code-header">
+                            <div class="code-buttons">
+                                <span class="code-button red"></span>
+                                <span class="code-button yellow"></span>
+                                <span class="code-button green"></span>
+                            </div>
+                            <span class="file-name">arduino_kodu.ino</span>
+                        </div>
+                        
+                        <div class="code-content" id="codeContent">
+                            <pre><code id="generatedCode">// Kodlar yükleniyor...</code></pre>
+                        </div>
+                    </div>
+
+                    <button class="upload-button" id="uploadButton">
+                        <i class="fas fa-upload"></i>
+                        Kodları Yükle!
+                    </button>
+                </div>
+            </section>
+
+            <!-- Success Section -->
+            <section class="success-section" id="successSection" style="display: none;">
+                <div class="success-container">
+                    <div class="success-animation">
+                        <div class="checkmark">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="celebration">
+                            <div class="confetti"></div>
+                            <div class="confetti"></div>
+                            <div class="confetti"></div>
+                            <div class="confetti"></div>
+                            <div class="confetti"></div>
+                        </div>
+                    </div>
+                    <h2 class="success-title">Kodlar Başarıyla Yüklendi! 🎉</h2>
+                    <p class="success-message">Harika iş çıkardın! Artık projen hazır!</p>
+                    
+                    <button class="restart-button" id="restartButton">
+                        <i class="fas fa-redo"></i>
+                        Yeni Kod Oluştur
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made with ❤️ for kids who love coding!</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
