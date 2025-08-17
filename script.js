@@ -137,11 +137,16 @@ void loop() {
 
 // Initialize Speech Recognition
 function initSpeechRecognition() {
+    console.log('🔧 initSpeechRecognition başlatılıyor...');
+    
     if ('webkitSpeechRecognition' in window) {
         recognition = new webkitSpeechRecognition();
+        console.log('✅ webkitSpeechRecognition bulundu');
     } else if ('SpeechRecognition' in window) {
         recognition = new SpeechRecognition();
+        console.log('✅ SpeechRecognition bulundu');
     } else {
+        console.error('❌ Ses tanıma desteklenmiyor!');
         alert('Üzgünüm, tarayıcın ses tanıma özelliğini desteklemiyor. Chrome veya Safari kullanmayı dene!');
         return;
     }
@@ -150,6 +155,8 @@ function initSpeechRecognition() {
     recognition.interimResults = true;
     recognition.lang = 'tr-TR';
     recognition.maxAlternatives = 1;
+    
+    console.log('⚙️ Ses tanıma ayarları yapıldı');
     
     // Auto stop after 10 seconds
     recognition.serviceAutoStop = true;
@@ -216,13 +223,19 @@ function initSpeechRecognition() {
         }
 
         if (finalTranscript.trim()) {
-            console.log('Final transcript:', finalTranscript);
+            console.log('🎤 Final transcript alındı:', finalTranscript);
             // Stop recognition immediately when we get final result
             recognition.stop();
             
             // Fix Turkish characters and process command
             const fixedCommand = fixTurkishChars(finalTranscript.trim());
-            setTimeout(() => processVoiceCommand(fixedCommand), 500);
+            console.log('🔧 Fixed command:', fixedCommand);
+            
+            console.log('⏰ 500ms sonra processVoiceCommand çağrılacak...');
+            setTimeout(() => {
+                console.log('🚀 processVoiceCommand çağrılıyor...');
+                processVoiceCommand(fixedCommand);
+            }, 500);
         }
     };
 
@@ -246,7 +259,7 @@ function initSpeechRecognition() {
                 errorMessage = 'İnternet bağlantısı gerekli! 🌐';
                 break;
             case 'aborted':
-                errorMessage = 'Ses tanıma iptal edildi. �';
+                errorMessage = 'Ses tanıma iptal edildi. 🔄';
                 break;
         }
         
@@ -254,8 +267,9 @@ function initSpeechRecognition() {
     };
 
     recognition.onend = function() {
+        console.log('🔚 recognition.onend çağrıldı');
         stopListening();
-        console.log('Ses tanıma sonlandı');
+        console.log('🔚 Ses tanıma sonlandı');
         
         // Clear timeouts
         if (speechTimeout) {
@@ -265,6 +279,19 @@ function initSpeechRecognition() {
         if (silenceTimeout) {
             clearTimeout(silenceTimeout);
             silenceTimeout = null;
+        }
+        
+        // Fallback: Eğer hiç transcript gelmemişse
+        const currentText = speechText.textContent;
+        if (currentText && currentText.includes('"') && currentText !== 'Mikrofona bas ve ne yapmak istediğini söyle! 🎤') {
+            console.log('🔄 Fallback: transcript bulundu ama işlenmemiş, manuel işleme alınıyor...');
+            const extractedText = currentText.replace(/"/g, '').trim();
+            if (extractedText && extractedText.length > 2) {
+                setTimeout(() => {
+                    console.log('🔄 Fallback processVoiceCommand çağrılıyor:', extractedText);
+                    processVoiceCommand(extractedText);
+                }, 1000);
+            }
         }
     };
 }
@@ -288,16 +315,30 @@ function stopListening() {
 
 // Process voice command and determine code type
 function processVoiceCommand(command) {
-    console.log('Processing command:', command);
+    console.log('🎯 processVoiceCommand çağrıldı! Command:', command);
     
-    // Show AI processing section with enhanced animation
-    showAIProcessing(command);
-    
-    // Simulate API call delay
-    simulateAPICall(command).then((codeType) => {
-        // Show generated code with spectacular effects
-        showGeneratedCode(codeType);
-    });
+    try {
+        // Show AI processing section with enhanced animation
+        console.log('🤖 showAIProcessing çağrılıyor...');
+        showAIProcessing(command);
+        
+        // Simulate API call delay
+        console.log('⚡ simulateAPICall başlatılıyor...');
+        simulateAPICall(command).then((codeType) => {
+            console.log('✅ simulateAPICall tamamlandı, codeType:', codeType);
+            // Show generated code with spectacular effects
+            showGeneratedCode(codeType);
+        }).catch((error) => {
+            console.error('❌ simulateAPICall hatası:', error);
+        });
+    } catch (error) {
+        console.error('❌ processVoiceCommand hatası:', error);
+        // Fallback - show AI processing manually
+        showAIProcessing(command);
+        setTimeout(() => {
+            showGeneratedCode('default');
+        }, 3000);
+    }
 }
 
 // Simulate AI API call
@@ -347,19 +388,29 @@ function simulateAPICall(command) {
 
 // Show AI processing section
 function showAIProcessing(command) {
-    speechSection.style.display = 'none';
-    aiSection.style.display = 'block';
-    codeSection.style.display = 'none';
-    successSection.style.display = 'none';
+    console.log('🎭 showAIProcessing çağrıldı, command:', command);
     
-    // Update AI title with user command
-    const aiTitle = document.querySelector('.ai-title');
-    if (command) {
-        aiTitle.innerHTML = `"${command}" için mükemmel kodlar oluşturuluyor! ✨`;
+    try {
+        speechSection.style.display = 'none';
+        aiSection.style.display = 'block';
+        codeSection.style.display = 'none';
+        successSection.style.display = 'none';
+        
+        console.log('📱 Section display ayarlandı');
+        
+        // Update AI title with user command
+        const aiTitle = document.querySelector('.ai-title');
+        if (aiTitle && command) {
+            aiTitle.innerHTML = `"${command}" için mükemmel kodlar oluşturuluyor! ✨`;
+            console.log('🏷️ AI title güncellendi');
+        }
+        
+        // Start AI status updates
+        console.log('🔄 updateAIStatus çağrılıyor...');
+        updateAIStatus('🚀 API bağlantısı kuruluyor...');
+    } catch (error) {
+        console.error('❌ showAIProcessing hatası:', error);
     }
-    
-    // Start AI status updates
-    updateAIStatus('🚀 API bağlantısı kuruluyor...');
 }
 
 // Update AI processing status
@@ -597,21 +648,26 @@ function restart() {
 
 // Event Listeners
 micButton.addEventListener('click', function() {
+    console.log('🎤 Mikrofon butonu tıklandı!');
+    
     if (!recognition) {
+        console.log('🔧 Recognition yok, initSpeechRecognition çağrılıyor...');
         initSpeechRecognition();
     }
     
     if (!isListening) {
-        console.log('Mikrofon butonu tıklandı - ses tanıma başlatılıyor');
+        console.log('🎯 Dinleme başlatılıyor... isListening:', isListening);
         speechText.textContent = 'Başlatılıyor... 🎤';
+        
         try {
+            console.log('🚀 recognition.start() çağrılıyor...');
             recognition.start();
         } catch (error) {
-            console.error('Ses tanıma başlatma hatası:', error);
+            console.error('❌ Ses tanıma başlatma hatası:', error);
             speechText.textContent = 'Ses tanıma başlatılamadı. Tekrar deneyin! 😊';
         }
     } else {
-        console.log('Mikrofon butonu tıklandı - ses tanıma durduruluyor');
+        console.log('🛑 Dinleme durduruluyor...');
         recognition.stop();
         speechText.textContent = 'Ses tanıma durduruldu. 🔇';
     }
@@ -706,7 +762,7 @@ restartButton.addEventListener('click', function() {
 
 // Initialize app when page loads
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Kodlama Arkadaşı uygulaması yüklendi!');
+    console.log('🎬 Kodlama Arkadaşı uygulaması yüklendi!');
     
     // Initialize speech recognition
     initSpeechRecognition();
@@ -715,6 +771,59 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         speechText.textContent = 'Mikrofona bas ve ne yapmak istediğini söyle! 🎤';
     }, 1000);
+    
+    // Test butonu ekle (debug için)
+    const testButton = document.createElement('button');
+    testButton.textContent = '🧪 Test AI';
+    testButton.style.cssText = `
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 9999;
+        padding: 10px;
+        background: #ff6b6b;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    `;
+    testButton.onclick = () => {
+        console.log('🧪 Test butonu tıklandı');
+        processVoiceCommand('test led yapıyor');
+    };
+    document.body.appendChild(testButton);
+    
+    // Ses tanıma testi butonu ekle
+    const speechTestButton = document.createElement('button');
+    speechTestButton.textContent = '🎤 Ses Test';
+    speechTestButton.style.cssText = `
+        position: fixed;
+        top: 60px;
+        right: 10px;
+        z-index: 9999;
+        padding: 10px;
+        background: #4ecdc4;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    `;
+    speechTestButton.onclick = () => {
+        console.log('🎤 Ses test butonu tıklandı');
+        console.log('Recognition object:', recognition);
+        console.log('isListening:', isListening);
+        console.log('speechText element:', speechText);
+        
+        if (recognition) {
+            console.log('✅ Recognition var, özellikleri kontrol ediliyor...');
+            console.log('- recognition.lang:', recognition.lang);
+            console.log('- recognition.continuous:', recognition.continuous);
+            console.log('- recognition.interimResults:', recognition.interimResults);
+        } else {
+            console.log('❌ Recognition yok!');
+        }
+    };
+    document.body.appendChild(speechTestButton);
 });
 
 // Handle visibility change (when user switches tabs)
