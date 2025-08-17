@@ -77,11 +77,14 @@ body {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
     animation: slideInUp 1s ease-out 0.3s both;
+    overflow: visible;
 }
 
 .microphone-container {
     position: relative;
     margin-bottom: 30px;
+    overflow: visible;
+    padding: 10px;
 }
 
 .mic-button {
@@ -121,10 +124,17 @@ body {
 .mic-button.recording::after {
     content: '🔴';
     position: absolute;
-    top: -5px;
-    right: -5px;
-    font-size: 1rem;
+    top: -8px;
+    right: -8px;
+    font-size: 1.2rem;
     animation: blink 1s infinite;
+    z-index: 10;
+    line-height: 1;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .mic-pulse {
